@@ -2,7 +2,11 @@ version: '3.9'
 
 services:
     jenkins:
-        image: jenkins/jenkins
+        # image: jenkins/jenkins
+        # build: .
+        build: 
+            dockerfile: JenkinsDockerfile
+            context: .
         container_name: jenkins
         ports:
             - 9090:8080
@@ -11,24 +15,24 @@ services:
         networks:
             - net
 
-    gitalab:
-        image: 'gitlab/gitlab-ee:latest'
-        container_name: gitlab
-        restart: always
-        hostname: 'sqa.trucklagbe.com'
-        environment:
-            GITLAB_OMNIBUS_CONFIG: |
-                external_url 'http://sqa.trucklagbe.com:8929'
-                gitlab_rails['gitlab_shell_ssh_port'] = 2224
-        ports:
-            - '8929:8929'
-            - '2224:22'
-        volumes:
-            - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/config:/etc/gitlab'
-            - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/logs:/var/log/gitlab'
-            - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/data:/var/opt/gitlab'
-        shm_size: '256m'
-        networks:
-            - net
+    # gitalab:
+    #     image: 'gitlab/gitlab-ee:latest'
+    #     container_name: gitlab
+    #     restart: always
+    #     hostname: 'sqa.trucklagbe.com'
+    #     environment:
+    #         GITLAB_OMNIBUS_CONFIG: |
+    #             external_url 'http://sqa.trucklagbe.com:8929'
+    #             gitlab_rails['gitlab_shell_ssh_port'] = 2224
+    #     ports:
+    #         - '8929:8929'
+    #         - '2224:22'
+    #     volumes:
+    #         - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/config:/etc/gitlab'
+    #         - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/logs:/var/log/gitlab'
+    #         - '/home/rakibul/Workstation/jenkins-scratchbook/gitlab-data/data:/var/opt/gitlab'
+    #     shm_size: '256m'
+    #     networks:
+    #         - net
 networks:
     net:
