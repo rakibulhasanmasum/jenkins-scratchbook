@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+    - name: copy python code from src to remote source
+      copy:
+        src: /Users/r_hasan/Desktop/jenkins-scratchbook/ansible/copy_test.py
+        dest: /usr/src/visitor.py
+        owner: root
+        group: root
+
+    - name: run file with python
+      shell: cd /usr/src/ && python3 visitor.py
+      register: foo
+
+    - debug: msg="{{foo.stdout}}"
+
+

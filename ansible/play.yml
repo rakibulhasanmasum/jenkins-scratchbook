@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+    - name: run existing python function
+      shell: cd /usr/src && python3 hello.py
+      register: foo
+
+    - debug: msg="printed {{ foo.stdout }}"
