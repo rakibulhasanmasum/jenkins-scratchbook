@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: copy files to nginx server
+      copy:
+        src: "/Users/r_hasan/.jenkins/workspace/admin panel automation/target/generated-report"
+        dest: /usr/share/nginx/html
+        owner: root
+        group: root
